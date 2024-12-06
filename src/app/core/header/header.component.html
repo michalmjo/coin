@@ -1,0 +1,23 @@
+<div class="wrap">
+  <nav class="main">
+    <ul class="flex-row">
+      <li routerLinkActive="active" routerLink="/home">Home</li>
+      <li routerLink="/">Contact</li>
+      <li routerLink="/">Page</li>
+    </ul>
+
+    <div class="theme">
+      <select (change)="changeTheme($event)">
+        <option value="light" [selected]="currentTheme === 'light'">
+          Light
+        </option>
+        <option value="dark" [selected]="currentTheme === 'dark'">Dark</option>
+      </select>
+    </div>
+
+    <div class="account-detail">
+      <p>User123</p>
+      <p>Logout</p>
+    </div>
+  </nav>
+</div>

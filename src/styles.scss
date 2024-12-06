@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+@import "./styles/abstracts/mixins";
+@import "./styles/abstracts/variables";
+@import "./styles/base/reset";
+@import "./styles/base/typograhpy";
+@import "./styles/components/buttons";
+@import "./styles/components/cards";
+@import "./styles/themes/dark-theme";
+@import "./styles/themes/light-theme";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.flex-center {
+  @include flex-center;
+}
+
+.text-primary {
+  color: var(--text-color);
+}
+
+.bg-secondary {
+  background-color: var(--secondary-color);
+}
+.wrap {
+  width: 100%;
+}
+.flex-row {
+  display: flex;
+  //   justify-content: center;
+  align-items: center;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+footer {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color);
+}

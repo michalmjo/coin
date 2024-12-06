@@ -1,0 +1,69 @@
+/* Zmienne dla różnych motywów */
+$light-theme-bg: #fff;
+$dark-theme-bg: #333;
+$light-theme-color: #000;
+$dark-theme-color: #fff;
+$primary-color: #007bff; // Ustal kolor dla przycisku
+
+/* Przycisk */
+button {
+  @include theme-colors("background-color", "primary-color");
+  color: var(--text-color);
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+
+  /* Dostosowanie tła przycisku w zależności od motywu */
+  &[data-theme="light"] {
+    @include theme-colors("background-color", "primary-color");
+    color: var(--secondary-color);
+  }
+
+  &[data-theme="dark"] {
+    @include theme-colors("background-color", "primary-color");
+    color: $dark-theme-color;
+  }
+}
+
+/* Style dla select */
+select {
+  @include theme-colors("background-color", "primary-color");
+  color: var(--text-color);
+  border: none;
+
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+}
+
+/* Style dla option */
+option {
+  @include theme-colors("background-color", "primary-color");
+  color: var(--text-color);
+}
+
+/* Dostosowanie dla motywu jasnego */
+[data-theme="light"] select {
+  @include theme-colors("background-color", "primary-color");
+  color: $light-theme-color;
+  border-color: $primary-color; /* Przykładowy kolor dla granicy */
+}
+
+[data-theme="light"] option {
+  @include theme-colors("background-color", "primary-color");
+  color: $light-theme-color;
+}
+
+/* Dostosowanie dla motywu ciemnego */
+[data-theme="dark"] select {
+  @include theme-colors("background-color", "primary-color");
+  color: $dark-theme-color;
+  border-color: $primary-color; /* Przykładowy kolor dla granicy */
+}
+
+[data-theme="dark"] option {
+  @include theme-colors("background-color", "primary-color");
+  color: $dark-theme-color;
+}
