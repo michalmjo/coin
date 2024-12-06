@@ -7,6 +7,7 @@
 @import "./styles/components/cards";
 @import "./styles/themes/dark-theme";
 @import "./styles/themes/light-theme";
+@import "./styles/components/tables";
 
 * {
   margin: 0;
@@ -15,9 +16,7 @@
 }
 
 .container {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -29,11 +28,12 @@
   color: var(--text-color);
 }
 
-.bg-secondary {
-  background-color: var(--secondary-color);
-}
 .wrap {
   width: 100%;
+}
+.wrapper {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 .flex-row {
   display: flex;
@@ -52,9 +52,15 @@ body {
 
 footer {
   padding: 20px;
-  position: absolute;
+  color: var(--text-color);
   bottom: 0;
   left: 0;
   width: 100%;
   background-color: var(--background-color);
+}
+.bg-main {
+  background-color: var(--background-color);
+}
+li {
+  cursor: pointer;
 }

@@ -1,6 +1,9 @@
 [data-theme="dark"] {
   --primary-color: rgb(41, 41, 41);
-  --secondary-color: #3b3b3b;
+  --secondary-color: #363636;
   --background-color: #121212;
   --text-color: #ffffff;
+  --table-bg-color: #ce0505; /* Tło tabeli w ciemnym motywie */
+  --header-bg-color: #9e2020; /* Tło nagłówka */
+  --header-text-color: #ffffff; /* Tekst w nagłówku */
 }

@@ -1,0 +1,20 @@
+.mat-mdc-table tbody,
+.mat-mdc-table tfoot,
+.mat-mdc-table thead,
+.mat-mdc-cell,
+.mat-mdc-footer-cell,
+.mat-mdc-header-row,
+.mat-mdc-row,
+.mat-mdc-footer-row,
+.mat-mdc-table .mat-mdc-header-cell {
+  background-color: var(--background-color) !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: var(--text-color) !important;
+}
+
+.mat-mdc-table .mat-mdc-header-cell,
+.mat-mdc-paginator-container {
+  background-color: var(--secondary-color) !important;
+  color: var(--text-color);
+}

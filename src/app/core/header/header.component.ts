@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedImplementationService } from 'src/app/service/shared-implementation.service';
+import { CryptoInfoService } from './services/crypto-info.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +9,14 @@ import { SharedImplementationService } from 'src/app/service/shared-implementati
 })
 export class HeaderComponent implements OnInit {
   currentTheme: string = 'light';
-  constructor(private sharedImplementsService: SharedImplementationService) {}
+  constructor(
+    private sharedImplementsService: SharedImplementationService,
+    private cryptoInfoService: CryptoInfoService
+  ) {}
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.currentTheme = this.sharedImplementsService.getSavedTheme();
+    this.cryptoInfoService.getlistCrypto();
   }
 
   changeTheme(event: Event): void {
