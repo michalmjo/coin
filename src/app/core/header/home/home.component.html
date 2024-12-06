@@ -1,5 +1,7 @@
+<app-loading-spinner [loading]="loading"></app-loading-spinner>
+
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" *ngIf="!loading">
     <!-- Position Column -->
     <ng-container matColumnDef="position">
       <th mat-header-cell *matHeaderCellDef>Id.</th>

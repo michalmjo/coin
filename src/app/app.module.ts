@@ -13,6 +13,7 @@ import { LoginComponent } from './core/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoadingSpinnerComponent } from './core/shared/components/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ExchangesComponent,
     ProductComponent,
     LoginComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     MatTableModule,

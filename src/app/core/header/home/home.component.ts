@@ -3,7 +3,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CryptoInfoService } from '../services/crypto-info.service';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +20,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
     'supply',
   ];
 
+  loading = false;
+
   CryptoData: any[] = [];
   dataSource = new MatTableDataSource<any>(this.CryptoData);
 
   constructor(private cryptoInfoService: CryptoInfoService) {}
   ngOnInit() {
+    this.loading = true;
     // Subskrypcja na odpowiedź serwisu i przypisanie danych do tabeli
     this.cryptoInfoService
       .getlistCrypto()
@@ -33,6 +36,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
           console.log(x);
           this.CryptoData = x;
           this.dataSource.data = x; // Przypisanie danych do dataSource
+        }),
+        finalize(() => {
+          this.loading = false;
         })
       )
       .subscribe();
