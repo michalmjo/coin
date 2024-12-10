@@ -1,4 +1,5 @@
 .global-container {
+  background-color: var(--secondary-color);
   display: flex;
   flex-wrap: wrap; /* Pozwala na zawijanie elementów */
 }
@@ -12,4 +13,5 @@
 .full-width {
   flex: 1 1 100%; /* Zajmuje 100% szerokości */
   box-sizing: border-box;
+  text-align: center;
 }

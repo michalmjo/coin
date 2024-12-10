@@ -29,6 +29,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   loading = false;
 
+  totalMCap: number = 0;
+
   CryptoData: any[] = [];
 
   dataSource = new MatTableDataSource<any>(this.CryptoData);
@@ -47,10 +49,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }),
         finalize(() => {
           this.loading = false;
+          this.sumAllCap();
         })
       )
       .subscribe();
+
     // this.dataSource.data = ELEMENT_DATA;
+  }
+
+  sumAllCap() {
+    let totalMCap = 0;
+    this.CryptoData.forEach((x) => {
+      const mCap = x.market_cap;
+
+      totalMCap += mCap;
+    });
+    this.totalMCap = totalMCap;
+    console.log('Total Market Cap:', totalMCap);
   }
 
   ngAfterViewInit() {
