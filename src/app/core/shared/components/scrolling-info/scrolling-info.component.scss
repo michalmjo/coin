@@ -1,0 +1,76 @@
+.scroll-container {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%; /* Dostosuj do swojego designu */
+  height: 50px; /* Dostosuj do swojego designu */
+  position: relative;
+  font-size: 12px;
+}
+
+.scroll-content {
+  display: inline-block;
+  animation: scroll 50s linear infinite;
+}
+
+.item {
+  display: inline-block;
+  padding: 0 20px;
+  color: var(--text-primary);
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(85%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+.brandsCarousel {
+  max-width: 1024px;
+  max-height: 50px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.brandsCarousel::before,
+.brandsCarousel::after {
+  content: "";
+  width: 100px;
+  height: 50px;
+  background: linear-gradient(
+    to right,
+    var(--background-color),
+    var(--slider-gradient)
+  );
+  position: absolute;
+  z-index: 2;
+}
+
+.brandsCarousel::before {
+  top: 0;
+  left: 0;
+}
+
+.brandsCarousel::after {
+  top: 0;
+  right: 0;
+  transform: rotateZ(180deg);
+}
+.price-difference {
+  font-weight: bold;
+  margin-left: 10px;
+
+  &.trend-up {
+    color: var(--slider-accent-color-up);
+  }
+
+  &.trend-down {
+    color: var(--slider-accent-color-down);
+  }
+}

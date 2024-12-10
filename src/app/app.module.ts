@@ -14,6 +14,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoadingSpinnerComponent } from './core/shared/components/loading-spinner/loading-spinner.component';
+import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/scrolling-info.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoadingSpinnerComponent } from './core/shared/components/loading-spinne
     ProductComponent,
     LoginComponent,
     LoadingSpinnerComponent,
+    ScrollingInfoComponent,
   ],
   imports: [
     MatTableModule,

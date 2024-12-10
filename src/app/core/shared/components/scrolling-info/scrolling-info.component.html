@@ -1,0 +1,11 @@
+<div class="scroll-container brandsCarousel">
+  <div class="scroll-content">
+    <div *ngFor="let item of items" class="item">
+      {{ item.name }}
+
+      <span class="price-difference" [ngClass]="item.trendClass">
+        {{ item.difference }}%
+      </span>
+    </div>
+  </div>
+</div>
