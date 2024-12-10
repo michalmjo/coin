@@ -15,6 +15,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoadingSpinnerComponent } from './core/shared/components/loading-spinner/loading-spinner.component';
 import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/scrolling-info.component';
+import { TrendsComponent } from './core/header/home/trends/trends.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/
     LoginComponent,
     LoadingSpinnerComponent,
     ScrollingInfoComponent,
+    TrendsComponent,
   ],
   imports: [
     MatTableModule,

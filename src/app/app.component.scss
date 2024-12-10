@@ -1,0 +1,15 @@
+.global-container {
+  display: flex;
+  flex-wrap: wrap; /* Pozwala na zawijanie elementów */
+}
+
+.half-width {
+  text-align: center;
+  flex: 1 1 50%; /* Każdy z tych divów zajmuje 50% szerokości */
+  box-sizing: border-box; /* Dodaje wsparcie dla marginesów i obramowań */
+}
+
+.full-width {
+  flex: 1 1 100%; /* Zajmuje 100% szerokości */
+  box-sizing: border-box;
+}

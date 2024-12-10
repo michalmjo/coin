@@ -2,6 +2,8 @@
 
 <app-loading-spinner [loading]="loading"></app-loading-spinner>
 
+<app-trends [data]="CryptoData"></app-trends>
+
 <div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" *ngIf="!loading">
     <!-- Position Column -->

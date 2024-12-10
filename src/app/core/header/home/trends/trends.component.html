@@ -1,0 +1,37 @@
+<div class="wrapper-margin">
+  <div class="wrap-main-trends">
+    <div class="container-trends">
+      <div class="title">High 24h</div>
+      <ul>
+        <li *ngFor="let item of displayedData; let i = index">
+          <div class="flex-row">
+            <img class="icon" [src]="item.image" alt="symbol" />
+            <div class="name-symbol">
+              {{ item.name | titlecase }} {{ item.symbol | uppercase }}
+            </div>
+            <div class="low-price">
+              {{ item.high_24h }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container-trends">
+      <div class="title">Low 24h</div>
+      <ul>
+        <li *ngFor="let item of displayedData; let i = index">
+          <div class="flex-row">
+            <img class="icon" [src]="item.image" alt="symbol" />
+            <div class="name-symbol">
+              {{ item.name | titlecase }} {{ item.symbol | uppercase }}
+            </div>
+            <div class="low-price">
+              {{ item.low_24h }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -13,6 +13,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Lato", sans-serif;
 }
 
 .container {
@@ -32,8 +33,12 @@
   width: 100%;
 }
 .wrapper {
-  max-width: 1024px;
+  max-width: 1244px;
   margin: 0 auto;
+}
+
+.wrapper-margin {
+  margin: 20px 0;
 }
 .flex-row {
   display: flex;
@@ -63,4 +68,8 @@ footer {
 }
 li {
   cursor: pointer;
+  list-style: none;
+}
+ul {
+  text-decoration: none;
 }
