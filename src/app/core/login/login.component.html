@@ -1,1 +1,63 @@
-<p>login works!</p>
+<div class="login-dialog">
+  <div
+    class="login-dialog-window"
+    [@dialogHeight]="isLoginMode ? 'login' : 'register'"
+  >
+    <span style="margin-left: auto" (click)="closeDialog()">Close</span>
+
+    <div class="login-mode">
+      <div
+        class="login"
+        [class.active]="isLoginMode"
+        (click)="switchMode(true)"
+      >
+        Login
+      </div>
+      <div
+        class="register"
+        [class.active]="!isLoginMode"
+        (click)="switchMode(false)"
+      >
+        Register
+      </div>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-wrapper">
+        <label>Email</label>
+        <input type="email" formControlName="email" />
+        <div *ngIf="submitted && f.email.errors" class="error">
+          <small *ngIf="f.email.errors?.['required']"
+            >Email jest wymagany</small
+          >
+          <small *ngIf="f.email.errors?.['email']">Nieprawidłowy format</small>
+        </div>
+
+        <label>Password</label>
+        <input type="password" formControlName="password" />
+        <div *ngIf="submitted && f.password.errors" class="error">
+          <small *ngIf="f.password.errors?.['required']"
+            >Hasło jest wymagane</small
+          >
+          <small *ngIf="f.password.errors?.['minlength']"
+            >Minimum 6 znaków</small
+          >
+        </div>
+
+        <ng-container *ngIf="!isLoginMode">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" />
+          <div *ngIf="submitted && f.confirmPassword?.errors" class="error">
+            <small *ngIf="f.confirmPassword.errors?.['required']">
+              Potwierdzenie hasła jest wymagane
+            </small>
+          </div>
+        </ng-container>
+
+        <button type="submit">
+          {{ isLoginMode ? "Zaloguj się" : "Zarejestruj się" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

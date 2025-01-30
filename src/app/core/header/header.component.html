@@ -1,4 +1,4 @@
-<div class="wrap">
+<div style="position: relative" class="wrap">
   <nav class="main">
     <ul class="flex-row">
       <li routerLinkActive="active" routerLink="/home">Home</li>
@@ -16,8 +16,11 @@
     </div>
 
     <div class="account-detail">
-      <p>User123</p>
-      <p>Logout</p>
+      <p *ngIf="!loginMode">User123</p>
+      <p (click)="userMode()" style="cursor: pointer">
+        {{ loginMode ? "Zaloguj" : "Wyloguj" }}
+      </p>
     </div>
   </nav>
+  <app-login (close)="openDialog = false" *ngIf="openDialog"></app-login>
 </div>

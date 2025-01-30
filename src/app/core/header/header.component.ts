@@ -8,6 +8,8 @@ import { CryptoInfoService } from './services/crypto-info.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  loginMode = true;
+  openDialog = false;
   currentTheme: string = 'light';
   constructor(
     private sharedImplementsService: SharedImplementationService,
@@ -19,6 +21,12 @@ export class HeaderComponent implements OnInit {
     this.cryptoInfoService.getlistCrypto();
   }
 
+  userMode() {
+    this.openDialog = true;
+  }
+  closeLoginDialog() {
+    this.openDialog = false; // 🔹 Zamykamy dialog
+  }
   changeTheme(event: Event): void {
     const selectElement = event.target as HTMLSelectElement; // Rzutowanie na HTMLSelectElement
     const theme = selectElement.value;

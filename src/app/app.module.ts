@@ -16,6 +16,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoadingSpinnerComponent } from './core/shared/components/loading-spinner/loading-spinner.component';
 import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/scrolling-info.component';
 import { TrendsComponent } from './core/header/home/trends/trends.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,8 @@ import { TrendsComponent } from './core/header/home/trends/trends.component';
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
