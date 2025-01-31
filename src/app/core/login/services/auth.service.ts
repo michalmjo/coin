@@ -2,15 +2,16 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ConfigService } from 'src/app/service/config.service';
 import { UserCredentials } from './user-credentials';
-import { catchError, Subject, tap, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Subject, tap, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { UserInfo } from './user-info';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  user = new Subject();
+  user = new BehaviorSubject<User | null>(null);
   apiKey: string = ``;
   private tokenExpirationTimer: any;
 
@@ -31,11 +32,14 @@ export class AuthService {
     };
     console.log(body);
     return this.http
-      .post<UserCredentials>(
+      .post<UserInfo>(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${this.apiKey}`,
         body
       )
-      .pipe(catchError(this.handleError), tap());
+      .pipe(
+        catchError(this.handleError),
+        tap((x) => this.handleAuth(x.email, x.localId, x.idToken, +x.expiresIn))
+      );
   }
 
   login(email: string, password: string) {
@@ -46,11 +50,16 @@ export class AuthService {
     };
 
     return this.http
-      .post<UserCredentials>(
+      .post<UserInfo>(
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.apiKey}`,
         body
       )
-      .pipe(catchError(this.handleError));
+      .pipe(
+        catchError(this.handleError),
+        tap((x) => {
+          this.handleAuth(x.email, x.localId, x.idToken, +x.expiresIn);
+        })
+      );
   }
 
   // daneUzytkownika
@@ -78,7 +87,7 @@ export class AuthService {
   // logout
   logout() {
     this.user.next(null);
-    this.router.navigate(['/auth']);
+    this.router.navigate(['/home']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
@@ -92,7 +101,7 @@ export class AuthService {
     let errorMessage = 'Nieznany błąd';
 
     if (!errorRes.error || !errorRes.error.error) {
-      return throwError(() => new Error(errorMessage));
+      return throwError(() => errorMessage);
     }
 
     switch (errorRes.error.error.message) {
@@ -110,6 +119,6 @@ export class AuthService {
         break;
     }
 
-    return throwError(() => new Error(errorMessage));
+    return throwError(() => errorMessage);
   }
 }

@@ -22,6 +22,8 @@ import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { UserCredentials } from './services/user-credentials';
 import { NotificationService } from '../shared/components/services/notification.service';
+import { UserInfo } from './services/user-info';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -52,7 +54,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {
     this.notificationService.getNotifications().subscribe((notifications) => {
       this.notifications = notifications;
@@ -111,7 +114,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     const { email, password } = this.loginForm.value;
 
-    let authObs: Observable<UserCredentials>;
+    let authObs: Observable<UserInfo>;
 
     if (this.loginForm.valid) {
       if (this.isLoginMode) {
@@ -124,6 +127,8 @@ export class LoginComponent implements OnInit, OnDestroy {
         (resData) => {
           console.log(resData);
           this.isLoading = false;
+          this.router.navigate(['/home']);
+          this.closeDialog();
         },
         (errorMessage) => {
           console.log(errorMessage);
@@ -138,7 +143,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   closeDialog(): void {
-    this.close.emit(); // Emitowanie zdarzenia zamykającego
+    this.close.emit();
     this.openDialog = false;
   }
 
