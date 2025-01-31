@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,17 @@ import { LoadingSpinnerComponent } from './core/shared/components/loading-spinne
 import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/scrolling-info.component';
 import { TrendsComponent } from './core/header/home/trends/trends.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfigService } from './service/config.service';
+
+export function loadConfig(configService: ConfigService) {
+  return () =>
+    configService
+      .loadConfig()
+      .toPromise()
+      .then((config) => {
+        configService.setConfig(config);
+      });
+}
 
 @NgModule({
   declarations: [
@@ -41,8 +52,16 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: loadConfig,
+      deps: [ConfigService],
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

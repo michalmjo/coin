@@ -5,13 +5,22 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { AuthService } from './services/auth.service';
+import { Observable } from 'rxjs';
+import { UserCredentials } from './services/user-credentials';
 
 @Component({
   selector: 'app-login',
@@ -27,17 +36,39 @@ import {
     ]),
   ],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   @Output() close = new EventEmitter<void>(); // Wyemitowanie zdarzenia do zamknięcia okna
 
   loginForm!: FormGroup;
   submitted = false;
   isLoginMode = true;
-
-  constructor(private fb: FormBuilder) {}
+  openDialog = false;
+  isLoading = false;
+  error: string = '';
+  constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.toggleBodyScroll(true);
+  }
+
+  ngOnDestroy(): void {
+    // Przy zamknięciu okna logowania, odblokuj przewijanie
+    this.toggleBodyScroll(false);
+  }
+
+  toggleBodyScroll(isOpen: boolean): void {
+    if (isOpen) {
+      // Blokujemy przewijanie
+      document.body.style.overflow = 'hidden';
+      // Dodajemy klasę dla efektu rozmycia tła
+      document.body.classList.add('modal-open');
+    } else {
+      // Odblokowujemy przewijanie
+      document.body.style.overflow = 'auto';
+      // Usuwamy klasę rozmycia tła
+      document.body.classList.remove('modal-open');
+    }
   }
 
   initForm(): void {
@@ -62,9 +93,29 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.submitted = true;
+    this.isLoading = true;
+    const { email, password } = this.loginForm.value;
 
-    if (this.loginForm.invalid) {
-      return;
+    let authObs: Observable<UserCredentials>;
+
+    if (this.loginForm.valid) {
+      if (this.isLoginMode) {
+        authObs = this.authService.login(email, password);
+      } else {
+        authObs = this.authService.register(email, password);
+      }
+
+      authObs.subscribe(
+        (resData) => {
+          console.log(resData);
+          this.isLoading = false;
+        },
+        (errorMessage) => {
+          console.log(errorMessage);
+          this.error = errorMessage;
+          this.isLoading = false;
+        }
+      );
     }
 
     console.log('Form Data:', this.loginForm.value);
@@ -72,6 +123,7 @@ export class LoginComponent implements OnInit {
 
   closeDialog(): void {
     this.close.emit(); // Emitowanie zdarzenia zamykającego
+    this.openDialog = false;
   }
 
   switchMode(isLogin: boolean): void {

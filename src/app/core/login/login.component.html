@@ -22,7 +22,9 @@
       </div>
     </div>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <app-loading-spinner [loading]="isLoading"></app-loading-spinner>
+
+    <form *ngIf="!isLoading" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="form-wrapper">
         <label>Email</label>
         <input type="email" formControlName="email" />
