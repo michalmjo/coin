@@ -21,6 +21,7 @@ import {
 import { AuthService } from './services/auth.service';
 import { Observable } from 'rxjs';
 import { UserCredentials } from './services/user-credentials';
+import { NotificationService } from '../shared/components/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -45,11 +46,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   openDialog = false;
   isLoading = false;
   error: string = '';
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+
+  notifications: string[] = [];
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
+    this.notificationService.getNotifications().subscribe((notifications) => {
+      this.notifications = notifications;
+    });
+  }
 
   ngOnInit(): void {
     this.initForm();
     this.toggleBodyScroll(true);
+  }
+  removeNotification(index: any) {
+    this.notificationService.removeNotification(index);
   }
 
   ngOnDestroy(): void {
@@ -113,6 +128,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         (errorMessage) => {
           console.log(errorMessage);
           this.error = errorMessage;
+          this.notificationService.addNotification(errorMessage);
           this.isLoading = false;
         }
       );

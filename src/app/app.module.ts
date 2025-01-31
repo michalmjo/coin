@@ -18,6 +18,7 @@ import { ScrollingInfoComponent } from './core/shared/components/scrolling-info/
 import { TrendsComponent } from './core/header/home/trends/trends.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from './service/config.service';
+import { NotificationComponent } from './core/shared/components/notification/notification.component';
 
 export function loadConfig(configService: ConfigService) {
   return () =>
@@ -40,6 +41,7 @@ export function loadConfig(configService: ConfigService) {
     LoadingSpinnerComponent,
     ScrollingInfoComponent,
     TrendsComponent,
+    NotificationComponent,
   ],
   imports: [
     MatTableModule,

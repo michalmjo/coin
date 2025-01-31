@@ -1,4 +1,13 @@
 <div class="login-dialog">
+  <p>Lorem ipsum dolo</p>
+  <div class="notifications">
+    <app-notification
+      *ngFor="let message of notifications; let i = index"
+      [message]="message"
+      [index]="i"
+      (closeNotification)="removeNotification($event)"
+    ></app-notification>
+  </div>
   <div
     class="login-dialog-window"
     [@dialogHeight]="isLoginMode ? 'login' : 'register'"

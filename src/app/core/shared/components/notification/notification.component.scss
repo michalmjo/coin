@@ -1,0 +1,38 @@
+.notification {
+  position: absolute;
+  bottom: 100px;
+  right: 100px;
+  width: 100%;
+  max-width: 350px; /* Maksymalna szerokość komunikatu */
+  background-color: var(--secondary-color);
+  border: 5px solid var(--border-primary-color); /* Gruby biały obramowanie */
+  color: var(--text-color); /* Kolor tekstu */
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap; /* Tekst ma się zawijać */
+  justify-content: space-between; /* Przycisk "Zamknij" jest po prawej stronie */
+  align-items: center; /* Wyrównanie do środka w pionie */
+  justify-content: right;
+  border-radius: 15px;
+  font-size: 12px;
+  z-index: 9999999999999;
+}
+p {
+  flex: 1; /* Tekst zajmuje dostępne miejsce */
+  margin: 0; /* Usunięcie marginesów wewnątrz elementu p */
+  flex-wrap: wrap; /* Tekst ma się zawijać */
+}
+
+button {
+  background-color: var(--button-primary-color);
+  border: none;
+  cursor: pointer;
+  color: var(--button-primary-color); /* Kolor tekstu przycisku */
+}
+
+.btn-red {
+  height: 30px;
+  min-width: 50px;
+  color: var(--text-color);
+  border: 1px solid var(--primary-color);
+}
